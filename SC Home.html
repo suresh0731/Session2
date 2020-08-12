@@ -1,0 +1,143 @@
+<html>
+    <head>
+        <!-- CSS only -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+<!-- JS, Popper.js, and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+<style>
+    #logo{
+        position: fixed;
+        right:40px;
+        height:40px;
+        padding-right: 10px;
+    }
+    body{
+        padding-top: 0px;
+        background-color: rgb(219, 216, 210);
+    }
+    a{
+        padding-left: 50px;
+        padding-right: 50px;
+    }
+    #homeicon
+    {
+        color: black;
+        padding-top: 6px;
+    }
+   #login{
+        position: fixed;
+        right: 250px;
+        top: 4px;
+        
+        border-style: solid;
+
+    }
+    .nav-link{
+        color: black;
+    }
+    .nav{
+        font-size: 1.2em;
+        background-color: white;
+        
+    }
+    img
+    {
+        height: 420px;
+
+    }
+    #im1{
+        background-color: white;
+        text-align: center;
+    }
+    #b1{
+        width: 5px;
+        border-radius: 50%;
+    }
+    
+
+</style>    
+</head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a href="#" id="homeicon"><svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-house" fill="currentColor" xmlns="http://www.w3.org/2000/svg" >
+                <path fill-rule="evenodd" d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
+                <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
+              </svg></a>
+            <a class="nav-link" href="#">You're in <span style="color:rgb(30, 194, 30)">India</span></a>
+            <a class="nav-link" href="#">Our Products</a>
+            <a class="nav-link" href="#">Promotions</a>
+            <a class="nav-link" href="#">Services</a>
+            <a class="nav-link" href="#">Help</a>
+            <a><button  id="login"class="btn btn-success">LOGIN  <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-lock" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M11.5 8h-7a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1zm-7-1a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-7zm0-3a3.5 3.5 0 1 1 7 0v3h-1V4a2.5 2.5 0 0 0-5 0v3h-1V4z"/>
+              </svg></button></a>
+            <a> <img id="logo" src="../images/standardchartered@2x.jpg"></a>
+          </nav>
+
+
+          <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+              <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+              <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+              <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="../images/11821_StanC_Personal-Loan-Banner_1600X420px.jpg" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                  <h5 style="color: black;">Available loan upto Rs. 50 Lakh</h5>
+                  
+                      <button class="btn btn-success">CHECK ELIGIBILITY NOW</button>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <img src="../images/in-term-deposit-and-earn-up-to-6.30-pa-1600x420px.jpg" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5 style="color: black;">Earn upto 6.30% p.a.interest</h5>
+                  
+                      <button class="btn btn-success">BOOK ONLINE</button>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <img src="../images/svtc_product-masthead-slider-banner.jpg" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5 style="color: black;">Enjoy upto 5% cashback on monthly spends</h5>
+                  
+                      <button class="btn btn-success">APPLY FOR INSTANT APPROVAL</button>
+                </div>
+              </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev" id="b1">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next" id="b1">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+          <p>What's New</p>
+          <div class="row">
+            <div class="col-sm-6 col-md-4" id="im1">
+                <img src="../images/digi-zomato400-in-homepage-pintile.jpg" title="Zomato">
+                <h4>Get 10% discount</h4>
+            </div>
+            <div class="col-sm-6 col-md-4" id="im1">
+                <img src="../images/in-impersonation-pintile-banner-400x400-1.jpg">
+                <h4>Impersonation</h4>
+
+            </div>
+            <div class="col-sm-6 col-md-4" id="im1">
+                <img src="../images/homepage-pintile-cashback-pin-tile-400x400-1.jpg">
+                <h4>Explore range</h4>
+
+            </div>
+
+         
+          
+        </body>
+    
+</html>
