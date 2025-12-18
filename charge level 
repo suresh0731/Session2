@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SubaccountSummaryPart" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="30" bottomMargin="30" uuid="sub-sum-uuid">
+    <!-- Same styles as main summary -->
+    <field name="accountNumber" class="java.lang.String"/>
+    <field name="accountName" class="java.lang.String"/>
+    <field name="charges" class="java.util.List"/>
+    <field name="total" class="java.lang.Double"/>
+    
+    <subDataset name="ChargesDataset" uuid="charges-dataset-sub">
+        <!-- Same as main -->
+    </subDataset>
+    
+    <pageHeader>
+        <band height="40" splitType="Stretch">
+            <image scaleImage="RetainShape" hAlign="Right">
+                <reportElement x="687" y="5" width="115" height="30" uuid="logo-sub"/>
+                <imageExpression><![CDATA["path/to/standard_chartered_logo.png"]]></imageExpression>
+            </image>
+        </band>
+    </pageHeader>
+    
+    <title>
+        <band height="300" splitType="Stretch">
+            <staticText>
+                <reportElement x="0" y="50" width="802" height="25" uuid="summary-title-sub"/>
+                <textElement hTextAlign="Center"/>
+                <text><![CDATA[Invoice Summary (Charge Level)]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="0" y="80" width="401" height="20" uuid="acct-num-label-sub"/>
+                <text><![CDATA[Invoice Account Number: ]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="150" y="80" width="251" height="20" uuid="acct-num-sub"/>
+                <textFieldExpression><![CDATA[$F{accountNumber}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="401" y="80" width="401" height="20" uuid="period-label-sub"/>
+                <text><![CDATA[Invoice Period: 01-Aug-2025 to 29-Aug-2025]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="0" y="105" width="802" height="20" uuid="acct-name-label-sub"/>
+                <text><![CDATA[Invoice Account Name: ]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="150" y="105" width="652" height="20" uuid="acct-name-sub"/>
+                <textFieldExpression><![CDATA[$F{accountName}]]></textFieldExpression>
+            </textField>
+            <!-- Table same as main -->
+            <componentElement>
+                <reportElement x="0" y="135" width="802" height="50" uuid="table-sub"/>
+                <jr:table>
+                    <datasetRun subDataset="ChargesDataset">
+                        <dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{charges})]]></dataSourceExpression>
+                    </datasetRun>
+                    <!-- Columns same as main -->
+                </jr:table>
+            </componentElement>
+            <staticText>
+                <reportElement x="0" y="190" width="682" height="20" uuid="total-label-sub"/>
+                <text><![CDATA[Total Amount]]></text>
+            </staticText>
+            <textField pattern="#,##0.00">
+                <reportElement style="TableNumberCell" x="682" y="190" width="120" height="20" uuid="total-sub"/>
+                <textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+            </textField>
+            <!-- Currency table same as main -->
+        </band>
+    </title>
+    
+    <pageFooter>
+        <!-- Same as main -->
+    </pageFooter>
+</jasperReport>
