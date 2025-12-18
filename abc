@@ -25,3 +25,15 @@ uuid="05569275-4fe4-4363-b87f-4c4b30e4db4c">
 </title>
 
 </jasperReport>
+
+
+
+
+<background>
+    <band height="842" splitType="Stretch">
+        <staticText>
+            <reportElement x="10" y="10" width="575" height="30" forecolor="#FF0000"/>
+            <text><![CDATA[DEBUG: Background text - if visible, PDF is not blank but content is missing.]]></text>
+        </staticText>
+    </band>
+</background>
