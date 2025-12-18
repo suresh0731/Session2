@@ -1,183 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CoverPart" pageWidth="595" pageHeight="842" orientation="Portrait" columnWidth="515" leftMargin="40" rightMargin="40" topMargin="30" bottomMargin="30">
-    <style name="DefaultStyle" isDefault="true" fontName="SansSerif" fontSize="10" pdfFontName="Helvetica">
-        <paragraph lineSpacing="Single" lineSpacingSize="1.0" leftIndent="0" spacingBefore="0" spacingAfter="0"/>
-    </style>
-    <style name="BoldLabel" isBold="true"/>
-    <style name="TitleStyle" fontSize="14" isBold="true"/>
-    <style name="SmallFooterStyle" fontSize="8"/>
-    <field name="invoiceReference" class="java.lang.String"/>
-    <field name="invoiceDate" class="java.lang.String"/>
-    <field name="customerName" class="java.lang.String"/>
-    <field name="customerAddress" class="java.lang.String"/>
-    <field name="invoiceStartDate" class="java.lang.String"/>
-    <field name="invoiceEndDate" class="java.lang.String"/>
-    <field name="invoiceCurrency" class="java.lang.String"/>
-    <field name="totalInvoiceAmount" class="java.lang.Double"/>
-    <field name="invoiceDueDate" class="java.lang.String"/>
-    <field name="paymentInfo.beneficiaryBank" class="java.lang.String"/>
-    <field name="paymentInfo.beneficiaryBankCode" class="java.lang.String"/>
-    <field name="paymentInfo.accountNumber" class="java.lang.String"/>
-    <pageHeader>
-        <band height="40">
-            <image scaleImage="RetainShape">
-                <reportElement x="400" y="0" width="115" height="30"/>
-                <imageExpression><![CDATA["path/to/standard_chartered_logo.png"]]></imageExpression>
-            </image>
-        </band>
-    </pageHeader>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" xmlns:p="http://jasperreports.sourceforge.net/jasperreports/parts" name="InvoiceBook" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
     <detail>
-        <band height="760">
-            <staticText>
-                <reportElement x="0" y="50" width="515" height="20"/>
-                <text><![CDATA[Date ]]></text>
-            </staticText>
-            <textField>
-                <reportElement x="100" y="50" width="415" height="20"/>
-                <textFieldExpression><![CDATA[$F{invoiceDate}]]></textFieldExpression>
-            </textField>
-            <staticText>
-                <reportElement x="0" y="80" width="515" height="90"/>
-                <textElement verticalAlignment="Top" markup="none">
-                    <paragraph lineSpacing="Single" spacingAfter="5"/>
-                </textElement>
-                <text><![CDATA[ ]]></text>
-            </staticText>
-            <textField>
-                <reportElement x="0" y="80" width="515" height="90"/>
-                <textFieldExpression><![CDATA[$F{customerName} + "\n" + $F{customerAddress}]]></textFieldExpression>
-            </textField>
-            <staticText>
-                <reportElement style="TitleStyle" x="0" y="180" width="515" height="30"/>
-                <text><![CDATA[Invoice]]></text>
-            </staticText>
-            <staticText>
-                <reportElement x="0" y="220" width="515" height="25"/>
-                <textElement>
-                    <paragraph spacingAfter="10"/>
-                </textElement>
-                <text><![CDATA[We advise that your custodial fees for the period of ]]></text>
-            </staticText>
-            <textField>
-                <reportElement x="250" y="220" width="265" height="25"/>
-                <textFieldExpression><![CDATA[$F{invoiceStartDate} + " to " + $F{invoiceEndDate} + " are as follows:"]]></textFieldExpression>
-            </textField>
-            <staticText>
-                <reportElement style="BoldLabel" x="0" y="255" width="200" height="20"/>
-                <text><![CDATA[Invoice Date]]></text>
-            </staticText>
-            <textField>
-                <reportElement x="210" y="255" width="305" height="20"/>
-                <textFieldExpression><![CDATA[$F{invoiceDate}]]></textFieldExpression>
-            </textField>
-            <staticText>
-                <reportElement style="BoldLabel" x="0" y="280" width="200" height="20"/>
-                <text><![CDATA[Invoice Reference]]></text>
-            </staticText>
-            <textField>
-                <reportElement x="210" y="280" width="305" height="20"/>
-                <textFieldExpression><![CDATA[$F{invoiceReference}]]></textFieldExpression>
-            </textField>
-            <staticText>
-                <reportElement style="BoldLabel" x="0" y="305" width="200" height="20"/>
-                <text><![CDATA[Invoice Currency / Amount]]></text>
-            </staticText>
-            <textField>
-                <reportElement x="210" y="305" width="305" height="20"/>
-                <textFieldExpression><![CDATA[$F{invoiceCurrency} + " " + $F{totalInvoiceAmount}]]></textFieldExpression>
-            </textField>
-            <staticText>
-                <reportElement style="BoldLabel" x="0" y="330" width="200" height="20"/>
-                <text><![CDATA[Invoice Account Number / Name]]></text>
-            </staticText>
-            <textField>
-                <reportElement x="210" y="330" width="305" height="20"/>
-                <textFieldExpression><![CDATA["4G6T30E1- BROWN BROTHERS HARRIMAN AND CO. BOSTON"]]></textFieldExpression>
-            </textField>
-            <staticText>
-                <reportElement style="BoldLabel" x="0" y="355" width="200" height="20"/>
-                <text><![CDATA[Invoice Due Date]]></text>
-            </staticText>
-            <textField>
-                <reportElement x="210" y="355" width="305" height="20"/>
-                <textFieldExpression><![CDATA[$F{invoiceDueDate}]]></textFieldExpression>
-            </textField>
-            <staticText>
-                <reportElement x="0" y="385" width="515" height="25"/>
-                <textElement>
-                    <paragraph spacingAfter="5"/>
-                </textElement>
-                <text><![CDATA[Please select one of the following modes of payment:]]></text>
-            </staticText>
-            <staticText>
-                <reportElement x="20" y="415" width="495" height="20"/>
-                <text><![CDATA[(a) Authorise us to debit your account with us]]></text>
-            </staticText>
-            <staticText>
-                <reportElement x="20" y="440" width="495" height="20"/>
-                <text><![CDATA[(b) Send us a cheque crossed to Standard Chartered Bank (Singapore) Limited]]></text>
-            </staticText>
-            <staticText>
-                <reportElement x="20" y="465" width="495" height="40"/>
-                <textElement verticalAlignment="Top"/>
-                <text><![CDATA[(c) For fees invoiced in USD Currency, remit amount under separate advise to our USD A/c: ]]></text>
-            </staticText>
-            <textField>
-                <reportElement x="300" y="465" width="215" height="40"/>
-                <textFieldExpression><![CDATA[$F{paymentInfo.accountNumber} + " with " + $F{paymentInfo.beneficiaryBank} + " - in favour of Standard Chartered Bank, Securities Services"]]></textFieldExpression>
-            </textField>
-            <staticText>
-                <reportElement x="0" y="515" width="515" height="25"/>
-                <textElement>
-                    <paragraph spacingAfter="10"/>
-                </textElement>
-                <text><![CDATA[Kindly contact us should you require any clarification via Email or Telephone or Fax given below.]]></text>
-            </staticText>
-            <staticText>
-                <reportElement x="0" y="550" width="300" height="20"/>
-                <text><![CDATA[Standard Chartered Bank (Singapore) Limited]]></text>
-            </staticText>
-            <staticText>
-                <reportElement x="300" y="550" width="215" height="20"/>
-                <text><![CDATA[Tel -]]></text>
-            </staticText>
-            <staticText>
-                <reportElement x="0" y="575" width="300" height="20"/>
-                <text><![CDATA[7 Changi Business Park Cres, Lvl 3]]></text>
-            </staticText>
-            <staticText>
-                <reportElement x="300" y="575" width="215" height="20"/>
-                <text><![CDATA[Fax -]]></text>
-            </staticText>
-            <staticText>
-                <reportElement x="0" y="600" width="300" height="20"/>
-                <text><![CDATA[Securities Svcs, Singapore 486028]]></text>
-            </staticText>
-            <staticText>
-                <reportElement x="300" y="600" width="215" height="20"/>
-                <text><![CDATA[Email: SG.SECURITIES.SERVICES@SC.COM]]></text>
-            </staticText>
+        <band height="0">
+            <part>
+                <p:subreportPart>
+                    <subreportExpression><![CDATA["CoverPart.jasper"]]></subreportExpression>
+                    <dataSourceExpression><![CDATA[$P{REPORT_DATA_SOURCE}]]></dataSourceExpression>
+                </p:subreportPart>
+            </part>
+            <part>
+                <p:subreportPart>
+                    <subreportExpression><![CDATA["MainSummaryPart.jasper"]]></subreportExpression>
+                    <dataSourceExpression><![CDATA[$P{REPORT_DATA_SOURCE}.subDataSource("invoiceSummary")]]></dataSourceExpression>
+                </p:subreportPart>
+            </part>
         </band>
     </detail>
-    <pageFooter>
-        <band height="50">
-            <staticText>
-                <reportElement style="SmallFooterStyle" x="0" y="0" width="515" height="60"/>
-                <textElement verticalAlignment="Top" markup="none"/>
-                <text><![CDATA[Standard Chartered Bank (Singapore) Limited
-Registration No. 201224747C | GST Group Registration No. MR-8500053-0
-8 Marina Boulevard, #27-01, Marina Bay Financial Centre, Singapore 018981]]></text>
-            </staticText>
-            <textField>
-                <reportElement style="SmallFooterStyle" x="360" y="60" width="155" height="20"/>
-                <textElement textAlignment="Right"/>
-                <textFieldExpression><![CDATA["Invoice Reference Number: " + $F{invoiceReference}]]></textFieldExpression>
-            </textField>
-            <staticText>
-                <reportElement style="SmallFooterStyle" x="360" y="80" width="155" height="20"/>
-                <textElement textAlignment="Right"/>
-                <text><![CDATA[Page 1 of 377]]></text>
-            </staticText>
-        </band>
-    </pageFooter>
+    <group name="ChargeLevelSummaries">
+        <groupHeader>
+            <band height="0">
+                <part>
+                    <p:subreportPart>
+                        <subreportExpression><![CDATA["SubaccountSummaryPart.jasper"]]></subreportExpression>
+                        <dataSourceExpression><![CDATA[$P{REPORT_DATA_SOURCE}.subDataSource("chargeLevelSummaries")]]></dataSourceExpression>
+                    </p:subreportPart>
+                </part>
+            </band>
+        </groupHeader>
+    </group>
+    <group name="TransactionDetails">
+        <groupHeader>
+            <band height="0">
+                <part>
+                    <p:subreportPart>
+                        <subreportExpression><![CDATA["TransactionDetailsPart.jasper"]]></subreportExpression>
+                        <dataSourceExpression><![CDATA[$P{REPORT_DATA_SOURCE}.subDataSource("transactionDetails")]]></dataSourceExpression>
+                    </p:subreportPart>
+                </part>
+            </band>
+        </groupHeader>
+    </group>
 </jasperReport>
