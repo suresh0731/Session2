@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TransactionDetailsPart" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="30" bottomMargin="30" uuid="trans-uuid">
+    <property name="net.sf.jasperreports.export.pdf.force.linebreak.policy" value="true"/>
+    <style name="DefaultStyle" isDefault="true" fontName="SansSerif" fontSize="10" pdfFontName="Helvetica" pdfEncoding="Cp1252">
+        <paragraph lineSpacing="1.2" spacingBefore="5" spacingAfter="5"/>
+    </style>
+    <style name="BoldLabel" isBold="true"/>
+    <style name="TableHeader" forecolor="#000000" backcolor="#FFFFFF" hTextAlign="Left" vTextAlign="Middle" isBold="true"/>
+    <style name="TableCell" hTextAlign="Left" vTextAlign="Middle"/>
+    <style name="TableNumberCell" hTextAlign="Right" vTextAlign="Middle"/>
+    <style name="SmallFooterStyle" fontSize="8"/>
+    <style name="NoteStyle" fontSize="8" isItalic="true"/>
+    
+    <field name="securityAccountNumber" class="java.lang.String"/>
+    <field name="securityAccountName" class="java.lang.String"/>
+    <field name="relationshipId" class="java.lang.String"/>
+    <field name="relationshipName" class="java.lang.String"/>
+    <field name="transactions" class="java.util.List"/>
+    
+    <subDataset name="TransactionsDataset" uuid="trans-dataset">
+        <field name="date" class="java.util.Date"/>
+        <field name="reference" class="java.lang.String"/>
+        <field name="securityName" class="java.lang.String"/>
+        <field name="category" class="java.lang.String"/>
+        <field name="chargeType" class="java.lang.String"/>
+        <field name="chargeItem" class="java.lang.String"/>
+        <field name="units" class="java.lang.Double"/>
+        <field name="marketValue" class="java.lang.String"/>
+        <field name="chargeAmount" class="java.lang.Double"/>
+        <field name="invoiceAmount" class="java.lang.Double"/>
+    </subDataset>
+    
+    <pageHeader>
+        <band height="40" splitType="Stretch">
+            <image scaleImage="RetainShape" hAlign="Right">
+                <reportElement x="687" y="5" width="115" height="30" uuid="logo-trans"/>
+                <imageExpression><![CDATA["path/to/standard_chartered_logo.png"]]></imageExpression>
+            </image>
+        </band>
+    </pageHeader>
+    
+    <title>
+        <band height="130" splitType="Stretch">
+            <staticText>
+                <reportElement x="0" y="50" width="802" height="25" uuid="trans-title"/>
+                <textElement hTextAlign="Center"/>
+                <text><![CDATA[Transaction Details/Invoice Period 01-Aug-2025 to 29-Aug-2025]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="0" y="80" width="401" height="20" uuid="sec-acct-num-label"/>
+                <text><![CDATA[Security Account Number : ]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="170" y="80" width="231" height="20" uuid="sec-acct-num"/>
+                <textFieldExpression><![CDATA[$F{securityAccountNumber}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="401" y="80" width="401" height="20" uuid="rel-id-label"/>
+                <text><![CDATA[Relationship ID: ]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="510" y="80" width="292" height="20" uuid="rel-id"/>
+                <textFieldExpression><![CDATA[$F{relationshipId}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="0" y="105" width="802" height="20" uuid="sec-acct-name-label"/>
+                <text><![CDATA[Security Account Name: ]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="170" y="105" width="632" height="20" uuid="sec-acct-name"/>
+                <textFieldExpression><![CDATA[$F{securityAccountName}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="0" y="130" width="401" height="20" uuid="rel-name-label"/>
+                <text><![CDATA[Relationship Name: ]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="170" y="130" width="632" height="20" uuid="rel-name"/>
+                <textFieldExpression><![CDATA[$F{relationshipName}]]></textFieldExpression>
+            </textField>
+            <!-- Column headers -->
+            <staticText>
+                <reportElement style="TableHeader" x="0" y="160" width="80" height="30" uuid="col-date"/>
+                <text><![CDATA[Date]]></text>
+            </staticText>
+            <staticText>
+                <reportElement style="TableHeader" x="80" y="160" width="150" height="30" uuid="col-ref"/>
+                <text><![CDATA[Our Reference / Your Reference]]></text>
+            </staticText>
+            <staticText>
+                <reportElement style="TableHeader" x="230" y="160" width="120" height="30" uuid="col-sec-name"/>
+                <text><![CDATA[Security Name]]></text>
+            </staticText>
+            <staticText>
+                <reportElement style="TableHeader" x="350" y="160" width="80" height="30" uuid="col-category"/>
+                <text><![CDATA[Security Category]]></text>
+            </staticText>
+            <staticText>
+                <reportElement style="TableHeader" x="430" y="160" width="80" height="30" uuid="col-charge-type"/>
+                <text><![CDATA[Charge Type]]></text>
+            </staticText>
+            <staticText>
+                <reportElement style="TableHeader" x="510" y="160" width="80" height="30" uuid="col-charge-item"/>
+                <text><![CDATA[Charge Item]]></text>
+            </staticText>
+            <staticText>
+                <reportElement style="TableHeader" x="590" y="160" width="80" height="30" uuid="col-units"/>
+                <text><![CDATA[Number of Units / Nominal]]></text>
+            </staticText>
+            <staticText>
+                <reportElement style="TableHeader" x="670" y="160" width="80" height="30" uuid="col-market-val"/>
+                <text><![CDATA[Market Value]]></text>
+            </staticText>
+            <staticText>
+                <reportElement style="TableHeader" x="750" y="160" width="80" height="30" uuid="col-charge-amt"/>
+                <text><![CDATA[Charge Amount with Tax]]></text>
+            </staticText>
+            <staticText>
+                <reportElement style="TableHeader" x="830" y="160" width="80" height="30" uuid="col-inv-amt"/>
+                <text><![CDATA[Invoice Amount with Tax]]></text>
+            </staticText>
+        </band>
+    </title>
+    
+    <detail>
+        <band height="20" splitType="Stretch">
+            <textField pattern="dd-MMM-yy">
+                <reportElement style="TableCell" x="0" y="0" width="80" height="20" uuid="row-date"/>
+                <textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement style="TableCell" x="80" y="0" width="150" height="20" uuid="row-ref"/>
+                <textFieldExpression><![CDATA[$F{reference}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement style="TableCell" x="230" y="0" width="120" height="20" uuid="row-sec-name"/>
+                <textFieldExpression><![CDATA[$F{securityName}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement style="TableCell" x="350" y="0" width="80" height="20" uuid="row-category"/>
+                <textFieldExpression><![CDATA[$F{category}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement style="TableCell" x="430" y="0" width="80" height="20" uuid="row-charge-type"/>
+                <textFieldExpression><![CDATA[$F{chargeType}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement style="TableCell" x="510" y="0" width="80" height="20" uuid="row-charge-item"/>
+                <textFieldExpression><![CDATA[$F{chargeItem}]]></textFieldExpression>
+            </textField>
+            <textField pattern="#,##0.00">
+                <reportElement style="TableNumberCell" x="590" y="0" width="80" height="20" uuid="row-units"/>
+                <textFieldExpression><![CDATA[$F{units}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement style="TableCell" x="670" y="0" width="80" height="20" uuid="row-market-val"/>
+                <textFieldExpression><![CDATA[$F{marketValue}]]></textFieldExpression>
+            </textField>
+            <textField pattern="#,##0.00">
+                <reportElement style="TableNumberCell" x="750" y="0" width="80" height="20" uuid="row-charge-amt"/>
+                <textFieldExpression><![CDATA[$F{chargeAmount}]]></textFieldExpression>
+            </textField>
+            <textField pattern="#,##0.00">
+                <reportElement style="TableNumberCell" x="830" y="0" width="80" height="20" uuid="row-inv-amt"/>
+                <textFieldExpression><![CDATA[$F{invoiceAmount}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+    
+    <lastPageFooter>
+        <band height="80" splitType="Stretch">
+            <staticText>
+                <reportElement style="NoteStyle" x="0" y="0" width="802" height="40" uuid="note"/>
+                <textElement verticalAlignment="Top">
+                    <paragraph lineSpacing="1.0"/>
+                </textElement>
+                <text><![CDATA[Note: Tiered fees will have average value shown at Transaction level and rounding off difference if any will be adjusted against one of the Transactions. Portfolio fees for assets held across multiple markets are computed by market but appear as a single line item for each security type.]]></text>
+            </staticText>
+            <!-- Currency table -->
+            <staticText>
+                <reportElement x="0" y="45" width="267" height="20" uuid="curr-header-trans1"/>
+                <text><![CDATA[Currency]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="267" y="45" width="267" height="20" uuid="curr-header-trans2"/>
+                <text><![CDATA[Exchange Rate]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="534" y="45" width="268" height="20" uuid="curr-header-trans3"/>
+                <text><![CDATA[As on Date]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="0" y="70" width="267" height="20" uuid="curr-na-trans1"/>
+                <text><![CDATA[NA]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="267" y="70" width="267" height="20" uuid="curr-na-trans2"/>
+                <text><![CDATA[NA]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="534" y="70" width="268" height="20" uuid="curr-na-trans3"/>
+                <text><![CDATA[NA]]></text>
+            </staticText>
+        </band>
+    </lastPageFooter>
+    
+    <pageFooter>
+        <!-- Same as others -->
+    </pageFooter>
+</jasperReport>
