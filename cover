@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CoverPart" pageWidth="595" pageHeight="842" orientation="Portrait" columnWidth="515" leftMargin="40" rightMargin="40" topMargin="30" bottomMargin="30" uuid="cover-uuid">
+    <property name="net.sf.jasperreports.export.pdf.force.linebreak.policy" value="true"/>
+    <style name="DefaultStyle" isDefault="true" fontName="SansSerif" fontSize="10" pdfFontName="Helvetica" pdfEncoding="Cp1252">
+        <paragraph lineSpacing="1.2" spacingBefore="5" spacingAfter="5"/>
+    </style>
+    <style name="BoldLabel" isBold="true"/>
+    <style name="TitleStyle" fontSize="14" isBold="true" hTextAlign="Center"/>
+    <style name="SmallFooterStyle" fontSize="8" vTextAlign="Top"/>
+    
+    <field name="date" class="java.util.Date"/>
+    <field name="recipientName" class="java.lang.String"/>
+    <field name="recipientAddress" class="java.lang.String"/>
+    <field name="reference" class="java.lang.String"/>
+    <field name="amount" class="java.lang.Double"/>
+    <field name="currency" class="java.lang.String"/>
+    <field name="accountNumber" class="java.lang.String"/>
+    <field name="accountName" class="java.lang.String"/>
+    <field name="dueDate" class="java.util.Date"/>
+    
+    <pageHeader>
+        <band height="40" splitType="Stretch">
+            <image scaleImage="RetainShape" hAlign="Right">
+                <reportElement x="400" y="5" width="115" height="30" uuid="logo-uuid"/>
+                <imageExpression><![CDATA["path/to/standard_chartered_logo.png"]]></imageExpression>
+            </image>
+        </band>
+    </pageHeader>
+    
+    <detail>
+        <band height="700" splitType="Stretch">
+            <staticText>
+                <reportElement x="0" y="50" width="515" height="20" uuid="date-label"/>
+                <textElement markup="none"/>
+                <text><![CDATA[Date 29-Aug-2025]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="0" y="80" width="515" height="100" uuid="recipient-uuid"/>
+                <textElement verticalAlignment="Top" markup="none">
+                    <paragraph spacingAfter="10"/>
+                </textElement>
+                <text><![CDATA[BROWN BROTHERS HARRIMAN AND CO. BOSTON.
+ATTN: GEORGE COUTOUMAS/ALI AYUB
+ACCOUNTING DEPARTMENT
+50 POST OFFICE SQUARE
+BOSTON, MA 02110-1548
+US United States Of America]]></text>
+            </staticText>
+            <staticText>
+                <reportElement style="TitleStyle" x="0" y="190" width="515" height="30" uuid="invoice-title"/>
+                <text><![CDATA[Invoice]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="0" y="230" width="515" height="25" uuid="advice-uuid"/>
+                <textElement>
+                    <paragraph spacingAfter="10"/>
+                </textElement>
+                <text><![CDATA[We advise that your custodial fees for the period of 01-Aug-2025 to 29-Aug-2025 are as follows:]]></text>
+            </staticText>
+            <staticText>
+                <reportElement style="BoldLabel" x="0" y="260" width="200" height="20" uuid="inv-date-label"/>
+                <text><![CDATA[Invoice Date]]></text>
+            </staticText>
+            <textField pattern="dd-MMM-yyyy">
+                <reportElement x="210" y="260" width="305" height="20" uuid="inv-date"/>
+                <textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement style="BoldLabel" x="0" y="285" width="200" height="20" uuid="inv-ref-label"/>
+                <text><![CDATA[Invoice Reference]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="210" y="285" width="305" height="20" uuid="inv-ref"/>
+                <textFieldExpression><![CDATA[$F{reference}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement style="BoldLabel" x="0" y="310" width="200" height="20" uuid="inv-curr-label"/>
+                <text><![CDATA[Invoice Currency / Amount]]></text>
+            </staticText>
+            <textField pattern="#,##0.00">
+                <reportElement x="210" y="310" width="305" height="20" uuid="inv-curr"/>
+                <textFieldExpression><![CDATA[$F{currency} + " " + $F{amount}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement style="BoldLabel" x="0" y="335" width="200" height="20" uuid="inv-acct-label"/>
+                <text><![CDATA[Invoice Account Number / Name]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="210" y="335" width="305" height="20" uuid="inv-acct"/>
+                <textFieldExpression><![CDATA[$F{accountNumber} + " - " + $F{accountName}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement style="BoldLabel" x="0" y="360" width="200" height="20" uuid="inv-due-label"/>
+                <text><![CDATA[Invoice Due Date]]></text>
+            </staticText>
+            <textField pattern="dd-MMM-yyyy">
+                <reportElement x="210" y="360" width="305" height="20" uuid="inv-due"/>
+                <textFieldExpression><![CDATA[$F{dueDate}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="0" y="390" width="515" height="25" uuid="payment-label"/>
+                <textElement>
+                    <paragraph spacingAfter="5"/>
+                </textElement>
+                <text><![CDATA[Please select one of the following modes of payment:]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="20" y="420" width="495" height="20" uuid="pay-a"/>
+                <text><![CDATA[(a) Authorise us to debit your account with us]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="20" y="445" width="495" height="20" uuid="pay-b"/>
+                <text><![CDATA[(b) Send us a cheque crossed to Standard Chartered Bank (Singapore) Limited]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="20" y="470" width="495" height="40" uuid="pay-c"/>
+                <textElement verticalAlignment="Top">
+                    <paragraph lineSpacing="1.2"/>
+                </textElement>
+                <text><![CDATA[(c) For fees invoiced in USD Currency, remit amount under separate advise to our USD A/c: 3582026967001 with SCB NEW YORK (BIC:SCBLUS33) - in favour of Standard Chartered Bank, Securities Services]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="0" y="520" width="515" height="25" uuid="contact-label"/>
+                <textElement>
+                    <paragraph spacingAfter="10"/>
+                </textElement>
+                <text><![CDATA[Kindly contact us should you require any clarification via Email or Telephone or Fax given below.]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="0" y="555" width="300" height="20" uuid="bank-info1"/>
+                <text><![CDATA[Standard Chartered Bank (Singapore) Limited]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="300" y="555" width="215" height="20" uuid="tel"/>
+                <text><![CDATA[Tel -]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="0" y="580" width="300" height="20" uuid="bank-info2"/>
+                <text><![CDATA[7 Changi Business Park Cres, Lvl 3]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="300" y="580" width="215" height="20" uuid="fax"/>
+                <text><![CDATA[Fax -]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="0" y="605" width="300" height="20" uuid="bank-info3"/>
+                <text><![CDATA[Securities Svcs, Singapore 486028]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="300" y="605" width="215" height="20" uuid="email"/>
+                <text><![CDATA[Email: SG.SECURITIES.SERVICES@SC.COM]]></text>
+            </staticText>
+        </band>
+    </detail>
+    
+    <pageFooter>
+        <band height="50" splitType="Stretch">
+            <staticText>
+                <reportElement style="SmallFooterStyle" x="0" y="0" width="515" height="30" uuid="reg-info"/>
+                <textElement verticalAlignment="Top" markup="none">
+                    <paragraph lineSpacing="1.0" spacingAfter="5"/>
+                </textElement>
+                <text><![CDATA[Standard Chartered Bank (Singapore) Limited
+Registration No. 201224747C | GST Group Registration No. MR-8500053-0
+8 Marina Boulevard, #27-01, Marina Bay Financial Centre, Singapore 018981]]></text>
+            </staticText>
+            <textField>
+                <reportElement style="SmallFooterStyle" x="360" y="35" width="155" height="15" uuid="inv-ref-bottom"/>
+                <textElement textAlignment="Right"/>
+                <textFieldExpression><![CDATA["Invoice Reference Number: " + $F{reference}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement style="SmallFooterStyle" x="360" y="40" width="155" height="10" uuid="page-num"/>
+                <textElement textAlignment="Right"/>
+                <textFieldExpression><![CDATA["Page " + $V{MASTER_CURRENT_PAGE} + " of "]]></textFieldExpression>
+            </textField>
+            <textField evaluationTime="Report">
+                <reportElement style="SmallFooterStyle" x="515" y="40" width="0" height="10" uuid="total-pages"/>
+                <textFieldExpression><![CDATA[$V{MASTER_TOTAL_PAGES}]]></textFieldExpression>
+            </textField>
+        </band>
+    </pageFooter>
+</jasperReport>
