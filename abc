@@ -5,6 +5,7 @@ uuid="05569275-4fe4-4363-b87f-4c4b30e4db4c">
 <property name="net.sf.jasperreports.print.create.bookmarks" value="false"/>
 <property name="net.sf.jasperreports.export.pdf.force.svg.shapes" value="true"/>
 <property name="net.sf.jasperreports.print.keep.full.text" value="true"/>
+<property name="net.sf.jasperreports.engine.JRParameter.REPORT_WHEN_NO_DATA_TYPE" value="ALL_SECTIONS_NO_DETAIL"/>
 
 <queryString>
 <![CDATA[]]>
