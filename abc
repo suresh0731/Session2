@@ -14,9 +14,10 @@ uuid="05569275-4fe4-4363-b87f-4c4b30e4db4c">
 <title>
 <band height="200" splitType="Stretch">
 <staticText>
-<reportElement x="0" y="60" width="555" height="70" uuid="b0788484-0360-4f76-93c7-f717a7fbe5b2"/>
+<reportElement x="60" y="60" width="435" height="70"/>
 <textElement textAlignment="Center" verticalAlignment="Middle">
-<font fontName="Arial" size="20"/>
+<font fontName="Arial" size="20" isBold="true"/>
+<paragraph spacingBefore="10" spacingAfter="10"/>
 </textElement>
 <text><![CDATA[Sample]]></text>
 </staticText>
