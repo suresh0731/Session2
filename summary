@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="MainSummaryPart" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="30" bottomMargin="30" uuid="main-sum-uuid">
+    <property name="net.sf.jasperreports.export.pdf.force.linebreak.policy" value="true"/>
+    <style name="DefaultStyle" isDefault="true" fontName="SansSerif" fontSize="10" pdfFontName="Helvetica" pdfEncoding="Cp1252">
+        <paragraph lineSpacing="1.2" spacingBefore="5" spacingAfter="5"/>
+    </style>
+    <style name="BoldLabel" isBold="true"/>
+    <style name="TableHeader" forecolor="#000000" backcolor="#FFFFFF" hTextAlign="Left" vTextAlign="Middle" isBold="true"/>
+    <style name="TableCell" hTextAlign="Left" vTextAlign="Middle"/>
+    <style name="TableNumberCell" hTextAlign="Right" vTextAlign="Middle"/>
+    <style name="SmallFooterStyle" fontSize="8"/>
+    
+    <field name="accountNumber" class="java.lang.String"/>
+    <field name="accountName" class="java.lang.String"/>
+    <field name="charges" class="java.util.List"/>
+    <field name="total" class="java.lang.Double"/>
+    
+    <subDataset name="ChargesDataset" uuid="charges-dataset">
+        <field name="type" class="java.lang.String"/>
+        <field name="quantity" class="java.lang.String"/>
+        <field name="amount" class="java.lang.Double"/>
+        <field name="taxAmount" class="java.lang.Double"/>
+        <field name="amountWithTax" class="java.lang.Double"/>
+        <field name="invoiceAmountWithTax" class="java.lang.Double"/>
+    </subDataset>
+    
+    <pageHeader>
+        <band height="40" splitType="Stretch">
+            <image scaleImage="RetainShape" hAlign="Right">
+                <reportElement x="687" y="5" width="115" height="30" uuid="logo-main"/>
+                <imageExpression><![CDATA["path/to/standard_chartered_logo.png"]]></imageExpression>
+            </image>
+        </band>
+    </pageHeader>
+    
+    <title>
+        <band height="300" splitType="Stretch">
+            <staticText>
+                <reportElement x="0" y="50" width="802" height="25" uuid="summary-title"/>
+                <textElement hTextAlign="Center"/>
+                <text><![CDATA[Invoice Summary]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="0" y="80" width="401" height="20" uuid="acct-num-label-main"/>
+                <text><![CDATA[Invoice Account Number: ]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="150" y="80" width="251" height="20" uuid="acct-num-main"/>
+                <textFieldExpression><![CDATA[$F{accountNumber}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="401" y="80" width="401" height="20" uuid="period-label-main"/>
+                <text><![CDATA[Invoice Period: 01-Aug-2025 to 29-Aug-2025]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="0" y="105" width="802" height="20" uuid="acct-name-label-main"/>
+                <text><![CDATA[Invoice Account Name: ]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="150" y="105" width="652" height="20" uuid="acct-name-main"/>
+                <textFieldExpression><![CDATA[$F{accountName}]]></textFieldExpression>
+            </textField>
+            <componentElement>
+                <reportElement x="0" y="135" width="802" height="50" uuid="table-main"/>
+                <jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+                    <datasetRun subDataset="ChargesDataset" uuid="charges-run-main">
+                        <dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{charges})]]></dataSourceExpression>
+                    </datasetRun>
+                    <jr:column width="160" uuid="col-type-main">
+                        <jr:columnHeader style="TableHeader" height="30"><staticText><text><![CDATA[Charge Type]]></text></staticText></jr:columnHeader>
+                        <jr:detailCell style="TableCell" height="20"><textField><textFieldExpression><![CDATA[$F{type}]]></textFieldExpression></textField></jr:detailCell>
+                    </jr:column>
+                    <jr:column width="160" uuid="col-qty-main">
+                        <jr:columnHeader style="TableHeader" height="30"><staticText><text><![CDATA[Chargeable Quantity]]></text></staticText></jr:columnHeader>
+                        <jr:detailCell style="TableCell" height="20"><textField><textFieldExpression><![CDATA[$F{quantity}]]></textFieldExpression></textField></jr:detailCell>
+                    </jr:column>
+                    <jr:column width="120" uuid="col-amount-main">
+                        <jr:columnHeader style="TableHeader" height="30"><staticText><text><![CDATA[Charge Amount]]></text></staticText></jr:columnHeader>
+                        <jr:detailCell style="TableNumberCell" height="20"><textField pattern="#,##0.00"><textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression></textField></jr:detailCell>
+                    </jr:column>
+                    <jr:column width="120" uuid="col-tax-main">
+                        <jr:columnHeader style="TableHeader" height="30"><staticText><text><![CDATA[Tax Amount]]></text></staticText></jr:columnHeader>
+                        <jr:detailCell style="TableNumberCell" height="20"><textField pattern="#,##0.00"><textFieldExpression><![CDATA[$F{taxAmount}]]></textFieldExpression></textField></jr:detailCell>
+                    </jr:column>
+                    <jr:column width="120" uuid="col-amt-tax-main">
+                        <jr:columnHeader style="TableHeader" height="30"><staticText><text><![CDATA[Charge Amount with Tax]]></text></staticText></jr:columnHeader>
+                        <jr:detailCell style="TableNumberCell" height="20"><textField pattern="#,##0.00"><textFieldExpression><![CDATA[$F{amountWithTax}]]></textFieldExpression></textField></jr:detailCell>
+                    </jr:column>
+                    <jr:column width="122" uuid="col-inv-tax-main">
+                        <jr:columnHeader style="TableHeader" height="30"><staticText><text><![CDATA[Invoice Amount with Tax]]></text></staticText></jr:columnHeader>
+                        <jr:detailCell style="TableNumberCell" height="20"><textField pattern="#,##0.00"><textFieldExpression><![CDATA[$F{invoiceAmountWithTax}]]></textFieldExpression></textField></jr:detailCell>
+                    </jr:column>
+                </jr:table>
+            </componentElement>
+            <staticText>
+                <reportElement x="0" y="190" width="682" height="20" uuid="total-label-main"/>
+                <text><![CDATA[Total Amount]]></text>
+            </staticText>
+            <textField pattern="#,##0.00">
+                <reportElement style="TableNumberCell" x="682" y="190" width="120" height="20" uuid="total-main"/>
+                <textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+            </textField>
+            <!-- Currency table -->
+            <staticText>
+                <reportElement x="0" y="220" width="267" height="20" uuid="curr-header1"/>
+                <text><![CDATA[Currency]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="267" y="220" width="267" height="20" uuid="curr-header2"/>
+                <text><![CDATA[Exchange Rate]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="534" y="220" width="268" height="20" uuid="curr-header3"/>
+                <text><![CDATA[As on Date]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="0" y="245" width="267" height="20" uuid="curr-na1"/>
+                <text><![CDATA[NA]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="267" y="245" width="267" height="20" uuid="curr-na2"/>
+                <text><![CDATA[NA]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="534" y="245" width="268" height="20" uuid="curr-na3"/>
+                <text><![CDATA[NA]]></text>
+            </staticText>
+        </band>
+    </title>
+    
+    <pageFooter>
+        <band height="50" splitType="Stretch">
+            <staticText>
+                <reportElement style="SmallFooterStyle" x="0" y="0" width="802" height="30" uuid="reg-info-main"/>
+                <textElement verticalAlignment="Top" markup="none">
+                    <paragraph lineSpacing="1.0" spacingAfter="5"/>
+                </textElement>
+                <text><![CDATA[Standard Chartered Bank (Singapore) Limited
+Registration No. 201224747C | GST Group Registration No. MR-8500053-0
+8 Marina Boulevard, #27-01, Marina Bay Financial Centre, Singapore 018981]]></text>
+            </staticText>
+            <textField>
+                <reportElement style="SmallFooterStyle" x="647" y="35" width="155" height="15" uuid="inv-ref-bottom-main"/>
+                <textElement textAlignment="Right"/>
+                <textFieldExpression><![CDATA["Invoice Reference Number: " + $P{reference}]]></textFieldExpression> <!-- Pass as param if needed -->
+            </textField>
+            <textField>
+                <reportElement style="SmallFooterStyle" x="647" y="40" width="155" height="10" uuid="page-num-main"/>
+                <textElement textAlignment="Right"/>
+                <textFieldExpression><![CDATA["Page " + $V{MASTER_CURRENT_PAGE} + " of "]]></textFieldExpression>
+            </textField>
+            <textField evaluationTime="Report">
+                <reportElement style="SmallFooterStyle" x="802" y="40" width="0" height="10" uuid="total-pages-main"/>
+                <textFieldExpression><![CDATA[$V{MASTER_TOTAL_PAGES}]]></textFieldExpression>
+            </textField>
+        </band>
+    </pageFooter>
+</jasperReport>
