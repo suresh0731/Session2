@@ -1,60 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="InvoiceBook" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="book-uuid">
-    <property name="net.sf.jasperreports.export.pdf.force.linebreak.policy" value="true"/>
-    <style name="DefaultStyle" isDefault="true" fontName="SansSerif" fontSize="10" pdfFontName="Helvetica" pdfEncoding="Cp1252"/>
-    <style name="BoldStyle" mode="Opaque" fontName="SansSerif" fontSize="10" isBold="true"/>
-    <style name="TitleStyle" fontName="SansSerif" fontSize="14" isBold="true"/>
-    <style name="SmallFooterStyle" fontName="SansSerif" fontSize="8"/>
-    <style name="TableHeader" forecolor="#000000" backcolor="#FFFFFF" hTextAlign="Left" vTextAlign="Middle" isBold="true"/>
-    <style name="TableCell" hTextAlign="Left" vTextAlign="Middle"/>
-    <style name="TableNumberCell" hTextAlign="Right" vTextAlign="Middle"/>
-    
-    <!-- Main dataset for dynamic iteration (use Java beans in code) -->
-    <field name="invoice" class="your.package.Invoice"/>
-    
-    <group name="SubaccountSummaries">
-        <groupExpression><![CDATA[$F{invoice.summaries}]]></groupExpression> <!-- Assume list index or group by -->
-        <groupHeader>
-            <band height="0"> <!-- Invisible band for part insertion -->
-                <part uuid="sub-summary-part">
-                    <p:subreportPart xmlns:p="http://jasperreports.sourceforge.net/jasperreports/parts" uuid="sub-part-uuid">
-                        <subreportExpression><![CDATA["SubaccountSummaryPart.jasper"]]></subreportExpression>
-                        <dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource(java.util.Collections.singletonList($F{invoice.summaries.get(P_INDEX)}))]]></dataSourceExpression> <!-- P_INDEX for loop -->
-                    </p:subreportPart>
-                </part>
-            </band>
-        </groupHeader>
-    </group>
-    
-    <group name="TransactionGroups">
-        <groupExpression><![CDATA[$F{invoice.transactionGroups}]]></groupExpression>
-        <groupHeader>
-            <band height="0">
-                <part uuid="transaction-part">
-                    <p:subreportPart xmlns:p="http://jasperreports.sourceforge.net/jasperreports/parts" uuid="trans-part-uuid">
-                        <subreportExpression><![CDATA["TransactionDetailsPart.jasper"]]></subreportExpression>
-                        <dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource(java.util.Collections.singletonList($F{invoice.transactionGroups.get(P_INDEX)}))]]></dataSourceExpression>
-                    </p:subreportPart>
-                </part>
-            </band>
-        </groupHeader>
-    </group>
-    
-    <!-- Cover and Main Summary as fixed parts -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="InvoiceBook" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
     <detail>
         <band height="0">
-            <part uuid="cover-part">
-                <p:subreportPart xmlns:p="http://jasperreports.sourceforge.net/jasperreports/parts" uuid="cover-uuid">
+            <part>
+                <p:subreportPart xmlns:p="http://jasperreports.sourceforge.net/jasperreports/parts">
                     <subreportExpression><![CDATA["CoverPart.jasper"]]></subreportExpression>
-                    <dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource(java.util.Collections.singletonList($F{invoice}))]]></dataSourceExpression>
+                    <dataSourceExpression><![CDATA[$P{REPORT_DATA_SOURCE}]]></dataSourceExpression>
                 </p:subreportPart>
             </part>
-            <part uuid="main-summary-part">
-                <p:subreportPart xmlns:p="http://jasperreports.sourceforge.net/jasperreports/parts" uuid="main-sum-uuid">
+            <part>
+                <p:subreportPart xmlns:p="http://jasperreports.sourceforge.net/jasperreports/parts">
                     <subreportExpression><![CDATA["MainSummaryPart.jasper"]]></subreportExpression>
-                    <dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource(java.util.Collections.singletonList($F{invoice.summaries.get(0)}))]]></dataSourceExpression> <!-- First summary is main -->
+                    <dataSourceExpression><![CDATA[$P{REPORT_DATA_SOURCE}.subDataSource("invoiceSummary")]]></dataSourceExpression>
                 </p:subreportPart>
             </part>
         </band>
     </detail>
+    <group name="ChargeLevelSummaries">
+        <groupHeader>
+            <band height="0">
+                <part>
+                    <p:subreportPart xmlns:p="http://jasperreports.sourceforge.net/jasperreports/parts">
+                        <subreportExpression><![CDATA["SubaccountSummaryPart.jasper"]]></subreportExpression>
+                        <dataSourceExpression><![CDATA[$P{REPORT_DATA_SOURCE}.subDataSource("chargeLevelSummaries")]]></dataSourceExpression>
+                    </p:subreportPart>
+                </part>
+            </band>
+        </groupHeader>
+    </group>
+    <group name="TransactionDetails">
+        <groupHeader>
+            <band height="0">
+                <part>
+                    <p:subreportPart xmlns:p="http://jasperreports.sourceforge.net/jasperreports/parts">
+                        <subreportExpression><![CDATA["TransactionDetailsPart.jasper"]]></subreportExpression>
+                        <dataSourceExpression><![CDATA[$P{REPORT_DATA_SOURCE}.subDataSource("transactionDetails")]]></dataSourceExpression>
+                    </p:subreportPart>
+                </part>
+            </band>
+        </groupHeader>
+    </group>
 </jasperReport>
