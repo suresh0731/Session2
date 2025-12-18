@@ -1,0 +1,78 @@
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.data.JsonDataSource;
+import net.sf.jasperreports.engine.export.JRPdfExporter;
+import net.sf.jasperreports.export.SimpleExporterInput;
+import net.sf.jasperreports.export.SimpleExporterInputItem;
+import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.Map;
+
+public class YourService {  // Replace with your class name
+
+    private static final Logger logger = LoggerFactory.getLogger(YourService.class);
+
+    // Assume this is injected or configured
+    private String billingInvoiceReportResource = "reports/Blank_A4.jasper";  // Path in resources
+
+    @Override
+    public byte[] generateBillingInvoicePdf(JasperRequest jasperRequest) throws BillingInvoiceGenerationException {
+        logger.info("Starting billing invoice PDF generation");
+
+        if (jasperRequest == null || jasperRequest.getJasperInputData() == null) {
+            throw new BillingInvoiceGenerationException("Invalid request: Jasper request and input data cannot be null or empty");
+        }
+
+        try (ByteArrayInputStream jsonStream = new ByteArrayInputStream(jasperRequest.getJasperInputData().getBytes(StandardCharsets.UTF_8))) {
+            // Load .jasper from resources
+            InputStream reportStream = this.getClass().getClassLoader().getResourceAsStream(billingInvoiceReportResource);
+            if (reportStream == null) {
+                throw new BillingInvoiceGenerationException("Report file not found in resources: " + billingInvoiceReportResource);
+            }
+
+            JasperReport jasperReport = (JasperReport) JRLoader.loadObject(reportStream);
+
+            // Use JsonDataSource; fallback to empty if JSON is invalid/empty
+            JRDataSource dataSource;
+            try {
+                dataSource = new JsonDataSource(jsonStream);
+            } catch (Exception e) {
+                logger.warn("JSON data invalid; using empty data source for static report");
+                dataSource = new JREmptyDataSource(1);  // 1 record to trigger bands if needed
+            }
+
+            // Parameters (add if your report uses any)
+            Map<String, Object> parameters = null;  // Or new HashMap<>(); parameters.put("key", value);
+
+            // Fill
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+
+            byte[] pdfBytes = exportPdf(jasperPrint);
+
+            logger.info("Billing invoice PDF generated successfully");
+            return pdfBytes;
+        } catch (Exception e) {
+            logger.error("Failed to generate billing invoice PDF: {}", e.getMessage(), e);
+            throw new BillingInvoiceGenerationException("Failed to generate billing invoice PDF", e);
+        }
+    }
+
+    private byte[] exportPdf(JasperPrint jasperPrint) throws DocumentServiceException {
+        try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
+            JRPdfExporter jrPdfExporter = new JRPdfExporter();
+            ArrayList<SimpleExporterInputItem> items = new ArrayList<>();
+            items.add(new SimpleExporterInputItem(jasperPrint));
+            jrPdfExporter.setExporterInput(new SimpleExporterInput(items));
+            jrPdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(outputStream));
+            jrPdfExporter.exportReport();
+            return outputStream.toByteArray();
+        } catch (JRException | IOException e) {
+            logger.error("Error exporting PDF from jasper", e);
+            throw new DocumentServiceException("ERROR_EXPORTING_PDF_FROM_JASPER", e);
+        }
+    }
+}
