@@ -1,0 +1,176 @@
+{
+"invoiceReference": "928586",
+
+"invoiceDate": "2025-08-29",
+
+"customerName": "BROWN BROTHERS HARRIMAN AND CO, BOSTON",
+
+"customerAddress": "ATTN: GEORGE COUTOUMAS/ALI AYUB ACCOUNTING DEPARTMENT SO POST OFFICE SQUARE BOSTON, MA 02118-1548 US United States Of America",
+
+"invoiceStartDate": "01-08-2025",
+
+"invoiceEndDate": "29-08-2025",
+
+"invoiceCurrency": "USD",
+
+"totalInvoiceAmount": 49383.72,
+
+"invoiceDueDate": "2025-09-12"
+
+"payment Info": {
+
+"beneficiaryBank": "SCB NEW YORK (BIC-SCBLUS33)",
+
+"beneficiaryBankCode": "SCBLUS33",
+
+"accountNumber": "3582026967001"
+
+"invoiceSummary": {
+
+"accountNumber": "560000358616"
+
+"accountName": "BBH BOSTON S/A SIA SEI GLOBAL MASTER FUND PLC/THE SEI GLOBAL MANAGED VOLATILITY FUND/LSV",
+
+"invoiceStartDate": "01-08-2025",
+
+"invoiceEndDate": "29-08-2025",
+
+"totalAmount": 119.72,
+
+"charges": [
+
+"chargeType": "Portfolio Fee",
+
+"currency": "USD",
+
+"chargeableQuantity: 9666265.67,
+
+"chargeAmount": 104.72,
+
+"taxAmount": 0.00, "chargeAmountwithTax": 104.72,
+
+"InvoiceAmountWithTax": 104.72
+
+"chargeType": "Trade Settlement Fee",
+
+"currency": "USD",
+
+"chargeableQuantity: 1.00,
+
+"chargeType": "Trade Settlement Fee",
+
+"currency": "USD",
+
+"chargeableQuantity": 1.00,
+
+"chargeAmount": 15.00,
+
+"taxAmount": 0.00,
+
+"chargeAmountWithTax": 15.00,
+
+"invoiceAmount": 15.00
+
+"currency ExchageDetails": [
+
+{
+
+"currency": "USD",
+
+"exchageRate": 1.00,
+
+"asonDate": "01-08-2025"
+}],
+
+"chargeLevelSummaries": [
+
+"accountNumber": "560000358616",
+
+"accountName": "BBH BOSTON S/A SIA SEI GLOBAL MASTER FUND PLC/THE SEI GLOBAL MANAGED VOLATILITY FUND/LSV",
+
+"invoiceStartDate": "01-08-2025",
+
+"invoiceEndDate": "29-08-2025",
+
+"charges": [
+
+{
+
+"chargeType": "Portfolio Fee",
+
+"currency": "USD",
+
+"chargeableQuantity": 9666265.67,
+
+"chargeAmount": 104.72,
+
+"taxAmount": 0.08,
+
+"chargeAmountwithTax": 104.72,
+
+"invoiceAmountWithTax": 104.72
+
+"chargeType": "Trade Settlement Fee",
+
+"currency": "USD",
+
+"chargeableQuantity": 1.00,
+
+"chargeAmount": 15.00,
+"taxAmount": 0.00,
+
+"chargeAmountWithTax": 15.00,
+
+"invoiceAmount": 15.00
+}]
+
+currency ExchageDetails": [
+
+"currency": "USD",
+
+"exchageRate": 1.00, "asOnDate": "01-08-2025"}]
+
+"transactionDetails": [
+
+{
+
+"securityAccountNumber": "000289200695",
+
+"securityAccountName": "BBHCO FOR LACM WORLD EX-US EQUITY CIT",
+
+"relationshipId": "REL001",
+
+"relationshipName": "BROWN BROTHERS HARRIMAN AND CO, BOSTON",
+
+"invoiceStartDate": "01-08-2025",
+
+"invoiceEndDate": "29-08-2025",
+
+"accountTotalAmount": 125456.78,
+
+"primaryCurrency": "USD",
+
+"transactions": [
+
+(
+
+"transactionDate": "2025-08-01",
+
+"internalReferenceNumber": "DVP119802136",
+
+"externalRefernceNumber": "211335369400000e",
+
+"securityName": "APPLE INC COMMON STOCK",
+
+"securityCategory": "Equity Instruments",
+
+"chargeType": "Trade Settlement Fee",
+
+"chargeltem": "TRANSACTION FEE",
+
+"quantity": 1000,
+
+"value": 37849.69,
+
+"Currency": "USD",
+}]
