@@ -1,0 +1,1 @@
+-javaagent:"C:\path\to\agent.jar" -Duser.timezone=Asia/Singapore -XX:+UnlockDiagnosticVMOptions -XX:DisableIntrinsic=_currentTimeMillis
