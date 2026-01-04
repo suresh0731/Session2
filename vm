@@ -1,1 +1,1 @@
--javaagent:"C:\path\to\agent.jar" -Duser.timezone=Asia/Singapore -XX:+UnlockDiagnosticVMOptions -XX:DisableIntrinsic=_currentTimeMillis
+-javaagent:"C:\path\to\mock-time-agent.jar" -Duser.timezone=Asia/Singapore -XX:+UnlockDiagnosticVMOptions -XX:DisableIntrinsic=_currentTimeMillis -XX:CompileCommand=exclude,java.lang.System::currentTimeMillis
